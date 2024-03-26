@@ -16,5 +16,4 @@ if __name__ == "__main__":
 
     mark_vertices(start_vertex=vert1)
 
-    print()
     g.output_graph_to_screen()

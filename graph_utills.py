@@ -65,43 +65,34 @@ class Graph:
             self.__add_vertex(vertex=link.v2)
 
     def output_graph_to_screen(self):
+        """
+        Print the graph information to the screen.
+
+        Each vertex is printed with its marking status and links.
+        If the vertex is unmarked, it will be represented by a '-' sign.
+        If the vertex is marked, it will be represented by a '+' sign.
+
+        Example output:
+            <Vertex: 1> (-): [<Link: Vertex_1 - Vertex_2>]
+            <Vertex: 2> (+): [<Link: Vertex_2 - Vertex_3>, <Link: Vertex_2 - Vertex_4>]
+            <Vertex: 3> (-): [<Link: Vertex_3 - Vertex_5>]
+        """
         for v in self._vertices:
             output = f"{v} ({'+' if v.marked else '-'}): {v.links}"
             print(output)
 
+        print()
+
 
 def create_graph() -> tuple[Graph, Vertex]:
     """
-    Function where you inputl all vertices and links
-    :return:
-    first object: Graph
-    second_object: Top Vertex
+    Function to create a graph with vertices and links.
+
+    Returns:
+        Tuple containing:
+            - The first object: Graph instance representing the graph.
+            - The second object: Top vertex of the graph.
     """
-
-    # vert1 = Vertex()
-    # vert2 = Vertex()
-    # vert3 = Vertex()
-    # vert4 = Vertex()
-    # vert5 = Vertex()
-    #
-    # link1 = Link(v1=vert1, v2=vert2)
-    # link2 = Link(v1=vert1, v2=vert3)
-    # link3 = Link(v1=vert2, v2=vert3)
-    # link4 = Link(v1=vert2, v2=vert4)
-    # link5 = Link(v1=vert2, v2=vert5)
-    # link6 = Link(v1=vert3, v2=vert5)
-    #
-    # graph = Graph()
-    #
-    # graph.add_link(link=link1)
-    # graph.add_link(link=link2)
-    # graph.add_link(link=link3)
-    # graph.add_link(link=link4)
-    # graph.add_link(link=link5)
-    # graph.add_link(link=link6)
-    #
-    # return graph, vert1
-
     graph = Graph()
     vertices = [Vertex() for _ in range(20)]
 

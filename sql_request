@@ -1,0 +1,64 @@
+# ПЕРВЫЙ СПОСОБ
+with helper as (
+    select
+        name,
+        count(case when mark = 5 then 1 else null end) over (
+            partition by name
+        ) as five_mark_count,
+        count(case when mark = 2 then 1 else null end) over (
+            partition by name
+        ) as two_mark_count
+    from
+        school
+)
+
+select distinct
+    name,
+    two_mark_count
+from
+    helper
+	where five_mark_count >= 10;
+
+
+# ВТОРОЙ СПОСОБ
+select
+	name,
+	two_mark_count
+from (
+	select
+		name,
+		count(case when mark = 5 then 1 else null end) as five_mark_count,
+		count(case when mark = 2 then 1 else null end) as two_mark_count
+	from
+		school
+		group by name
+	) as helper
+	where five_mark_count >= 10;
+
+
+# ТРЕТИЙ СПОСОБ
+select distinct
+	school.name,
+	five_mark_count,
+	two_mark_count
+from
+	school
+	left join (
+		select
+			name,
+			count(mark) as five_mark_count
+		from
+			school
+			where mark = 5
+			group by name
+	) helper1 on helper1.name = school.name
+	left join (
+		select
+			name,
+			count(mark) as two_mark_count
+		from
+			school
+			where mark = 2
+			group by name
+	) helper2 on helper2.name = school.name
+	where five_mark_count >= 10;
